@@ -65,7 +65,7 @@ theme="light"
     <option value="student">student</option>
     <option value="admin">admin</option>
 </select>
-<input type="submit" className='btn btn-dark  w-100 ' name="" id="" />
+<input type="submit" className='btn btn-dark  sdda w-100 ' name="" id="" />
         </form>
 
 <img src={img} alt="" />
