@@ -20,6 +20,11 @@ import 'react-toastify/dist/ReactToastify.css';
 import { ThemeProvider } from './ThemeProvider';
 import Theme from './Theme';
 import SumCalculator from './Memo';
+import BasicCard from './Cardm';
+import { View } from './View';
+import { UpdateForm } from './Update';
+import Profile from './Profile';
+
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -41,6 +46,10 @@ root.render(
       <Route path='login' element={<Login/>}/>
       <Route path='theme' element={<Theme/>}/>
       <Route path='memo' element={<SumCalculator/>}/>
+      <Route path='BasicCard' element={<BasicCard/>}/>
+      <Route path='view' element={<View/>}/>
+      <Route path='update' element={<UpdateForm/>}/>
+      <Route path='profile' element={<Profile/>}/>
       </Route>
       
 

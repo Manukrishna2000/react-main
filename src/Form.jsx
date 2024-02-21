@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { adddata } from './counterSlice'
 import { ToastContainer, toast } from 'react-toastify'
 import FileBase64 from 'react-file-base64';
+import axios from 'axios'
 
 export const Form = () => {
 
@@ -21,15 +22,21 @@ const handleChange=(event)=>{
     setData({...data,[event.target.name]:event.target.value})
 
 }
-const handlesubmit=(event)=>{
+const handlesubmit=async (event)=>{
     event.preventDefault()
-    dispatch(adddata({...data,['image']:img}))
+    // dispatch(adddata({...data,['image']:img}))
+    let response=await axios.post('http://localhost:4000/insert',data)
+    console.log(response);
     toast.success('registration succesful')
     // navigate('/card')
 
 
 }
+const handleImageChange = (event) => {
+    setData({ ...data, image: event.target.files[0] });
+};
 
+console.log(data);
   return (
     <div>
         <ToastContainer
@@ -44,14 +51,14 @@ draggable
 pauseOnHover
 theme="light"
 />
-        <form onSubmit={handlesubmit} className='p-3 w-50 m-auto '>
+        <form onSubmit={handlesubmit} enctype="multipart/form-data" className='p-3 w-50 m-auto '>
 <input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="username" id="" value={data.username ? data.username : ''}  placeholder='username' />
 <input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="password" id="" value={data.password ? data.password : ''} placeholder='password' />
 <input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="firstName" id="" value={data.firstName ? data.firstName : ''} placeholder='first name' />
 <input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="lastName" id="" value={data.lastName ? data.lastName : ''} placeholder='last name' />
 <input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="age" id="" value={data.age ? data.age : ''} placeholder='age' />
-<FileBase64
-        onDone={(res)=>setImage(res.base64)} />
+<input type="text" onChange={handleChange} className='form-control mt-3 mb-3' name="adress" id="" value={data.age ? data.age : ''} placeholder='age' />
+<input type="file" onChange={handleImageChange} className="form-control mt-3 mb-3" name="image" accept="image/*" />
 <select name="usertype" onChange={handleChange}>
     <option value=""  >select user</option>
     <option value="teacher">teacher</option>

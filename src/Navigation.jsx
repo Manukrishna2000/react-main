@@ -1,7 +1,7 @@
 import React, { useContext } from 'react'
 import { Form } from './Form'
 import App from './App'
-import { Link, Outlet } from 'react-router-dom'
+import { Link, Outlet, useNavigate } from 'react-router-dom'
 import { ThemeContext } from './ThemeProvider'
 
 export const Navigation = () => {
@@ -13,6 +13,13 @@ export const Navigation = () => {
     backgroundColor:theme=='light'?'white':'black',
     color:theme=='light'?'black':'white'
   }
+  const navigate=useNavigate()
+  let logout=()=>{
+    localStorage.removeItem('token')
+    localStorage.removeItem('id')
+    navigate('/login')
+    
+  }
   return (
     <>
 
@@ -20,6 +27,7 @@ export const Navigation = () => {
       <Link to='/register'><span>Register</span></Link>
       <Link to='/card'><span>Home</span></Link>
       <Link to='/login'><span>Login</span></Link>
+      <button onClick={logout}>Logout</button>
       <button onClick={toggleTheme}>toggle theme</button>
     </div>
 <div style={themestyle} >
