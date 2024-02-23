@@ -17,6 +17,16 @@ const [data,setData]=useState('')
 const [img,setImage]=useState('')
 
 
+const formData = new FormData();
+formData.append('username', data.username);
+formData.append('password', data.password);
+formData.append('firstName', data.firstName);
+formData.append('lastName', data.lastName);
+formData.append('age', data.age);
+formData.append('address', data.address);
+formData.append('usertype', data.usertype);
+formData.append('image', data.image); // Assuming data.image is the file object
+
 
 const handleChange=(event)=>{
     setData({...data,[event.target.name]:event.target.value})
@@ -25,8 +35,8 @@ const handleChange=(event)=>{
 const handlesubmit=async (event)=>{
     event.preventDefault()
     // dispatch(adddata({...data,['image']:img}))
-    let response=await axios.post('http://localhost:4000/insert',data)
-    console.log(response);
+    let response=await axios.post('http://localhost:4000/insert',formData)
+    console.log(response);  
     toast.success('registration succesful')
     // navigate('/card')
 
